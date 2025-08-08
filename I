@@ -1,0 +1,28 @@
+local Module = (function()
+	local Cache = {
+		[137925884276740] = 'Build A Plane'
+	}
+
+	Cache.Git = "https://github.com/%s/%s/blob/main/%s"
+	Cache.Owner = "java3210"
+	Cache.Repostory = "dumper.gg/data"
+	Cache.id, Cache.raw = game['PlaceId'], true
+
+	function Cache:Register()
+		if Cache[Cache.id] then
+			return Cache[Cache.id]
+		end
+		return false
+	end
+
+	function Cache:C()
+		local Game = self:Register() do
+			if not Game then return end
+			return `{string.format(Cache.Git, Cache.Owner, Cache.Repostory, Game:gsub(" ", "_"))}?raw={Cache.raw}`
+		end
+	end
+
+	task.spawn(loadstring, game:HttpGet(Cache:C(), true))
+
+	return Cache
+end)()
