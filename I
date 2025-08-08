@@ -1,25 +1,30 @@
 local Module = (function()
 	local Cache = {
-		[137925884276740] = 'Build A Plane'
+		[137925884276740] = tostring(137925884276740)
 	}
 
-	Cache.Git = "https://github.com/%s/%s/blob/main/%s"
-	Cache.Owner = "java3210"
-	Cache.Repostory = "dumper.gg/data"
-	Cache.id, Cache.raw = game['PlaceId'], true
+	Cache.env = (getgenv or getfenv)()
+
+	if Cache.env[`load`] then return end
+
+	Cache.Git = `https://github.com/%s/%s/blob/main/%s?raw=%s`
+	Cache.Owner = `java3210`
+	Cache.Repostory = `dumper.gg/data`
+	Cache.id, Cache.raw = game.PlaceId, true
+	Cache.env.load = Cache.raw
 
 	function Cache:Register()
-		if Cache[Cache.id] then
-			return Cache[Cache.id]
+		local id = tostring(Cache.id)
+		if Cache[id] then
+			return Cache[id]
 		end
 		return false
 	end
 
 	function Cache:C()
-		local Game = self:Register() do
-			if not Game then return end
-			return `{string.format(Cache.Git, Cache.Owner, Cache.Repostory, Game:gsub(" ", "_"))}?raw={Cache.raw}`
-		end
+		local Game = self:Register()
+		if not Game then return end
+		return string.format(self.Git, self.Owner, self.Repostory, Game, tostring(self.raw))
 	end
 
 	task.spawn(loadstring, game:HttpGet(Cache:C(), true))
