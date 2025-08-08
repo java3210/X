@@ -1,6 +1,7 @@
 local Module = (function()
 	local Cache = {
-		[137925884276740] = "data/137925884276740.lua"
+		[137925884276740] = "data/137925884276740.lua",
+		[16281300371] = "data/16281300371.lua"
 	}
 
 	if game:GetService('CoreGui'):FindFirstChild("lnwza") then
