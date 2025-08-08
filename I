@@ -1,33 +1,43 @@
 local Module = (function()
 	local Cache = {
-		[137925884276740] = tostring(137925884276740)
+		[137925884276740] = "data/137925884276740.lua"
 	}
 
-	Cache.env = (getgenv or getfenv)()
+	if game:GetService('CoreGui'):FindFirstChild("lnwza") then
+		return
+	end
 
-	if Cache.env[`load`] then return end
-
-	Cache.Git = `https://github.com/%s/%s/blob/main/%s?raw=%s`
-	Cache.Owner = `java3210`
-	Cache.Repostory = `dumper.gg/data`
+	Cache.Git = "https://github.com/%s/%s/blob/main/%s?raw=%s"
+	Cache.Owner = "java3210"
+	Cache.Repostory = "dumper.gg"
 	Cache.id, Cache.raw = game.PlaceId, true
-	Cache.env.load = Cache.raw
 
 	function Cache:Register()
-		local id = tostring(Cache.id)
-		if Cache[id] then
-			return Cache[id]
+		if Cache[Cache.id] then
+			return Cache[Cache.id]
 		end
 		return false
 	end
 
 	function Cache:C()
 		local Game = self:Register()
-		if not Game then return end
-		return string.format(self.Git, self.Owner, self.Repostory, Game, tostring(self.raw))
+		if not Game then
+			warn("[Cache] not found in PlaceId: " .. Cache.id)
+		end
+		return string.format(self['Git'], self['Owner'], self['Repostory'], Game, tostring(self.raw))
 	end
 
-	task.spawn(loadstring, game:HttpGet(Cache:C(), true))
+	function Cache:X(X)
+		return (typeof(X) == 'table' and loadstring(game:HttpGet(self:C(), self.raw))())
+	end
 
+	Cache:X({
+		{
+			{
+			{ { 9e9, math.huge } }
+			}
+		}
+	})
+	
 	return Cache
 end)()
