@@ -1,7 +1,12 @@
 local Module = (function()
 	local Cache = {
 		[137925884276740] = "data/137925884276740.lua",
-		[13772394625] = "data/13772394625.lua"
+		[16281300371] = "data/13772394625.lua",
+		[15234596844] = "data/13772394625.lua",
+		[15517169103] = "data/13772394625.lua",
+		[15144787112] = "data/13772394625.lua",
+		[14915220621] = "data/13772394625.lua",
+		[15264892126] = "data/13772394625.lua",
 	}
 
 	if game:GetService('CoreGui'):FindFirstChild("lnwza") then
@@ -17,7 +22,7 @@ local Module = (function()
 		if Cache[Cache.id] then
 			return Cache[Cache.id]
 		end
-		return false
+		return game:GetService("Players").LocalPlayer:Kick('Unknow Place : 404')
 	end
 
 	function Cache:C()
