@@ -2,7 +2,7 @@ local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 
 if CoreGui:FindFirstChild("lnwza") then
-	CoreGui:FindFirstChild("lnwza"):Destroy()
+	return
 end
 
 local Xynapse = {}
@@ -150,6 +150,11 @@ local Module = (function()
 		[15264892126] = "data/13772394625.lua",
 		[13772394625] = "data/13772394625.lua",
 		[16044264830] = "data/13772394625.lua",
+		
+		--Bloxfruits
+		[2753915549] = 'data/2753915549.lua',
+		[4442272183] = 'data/2753915549.lua',
+		[7449423635] = 'data/2753915549.lua',
 	}
 
 	Cache.Git = "https://github.com/%s/%s/blob/main/%s?raw=%s"
